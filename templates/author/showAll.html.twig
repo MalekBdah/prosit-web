@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+  <h2 style="text-align:center;">Liste des auteurs</h2>
+
+  <p style="text-align:center;">
+    <a href="{{ path('addStat') }}">➕ Ajouter un auteur test</a> |
+    <a href="{{ path('addForm') }}"> Ajouter via formulaire</a>
+  </p>
+
+  <table border="1" cellspacing="0" cellpadding="8" align="center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in list %}
+        <tr>
+          <td>{{ i.id }}</td>
+          <td>{{ i.username }}</td>
+          <td>{{ i.email }}</td>
+          <td>
+            <a href="{{ path('showAuthorDetails', {'id': i.id}) }}"> Voir</a> |
+            <a href="{{ path('updateAuthor', {'id': i.id}) }}"> Modifier</a> |
+            <a href="{{ path('deleteAuthor', {'id': i.id}) }}"
+               onclick="return confirm('Supprimer {{ i.username }} ?');">Supprimer</a>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" style="text-align:center;">Aucun auteur trouvé</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

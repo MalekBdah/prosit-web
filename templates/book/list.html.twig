@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres{% endblock %}
+
+{% block body %}
+<h1>Liste des livres</h1>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<h3>Nombre de livres publiés : {{ publishedCount }}</h3>
+<h3>Nombre de livres non publiés : {{ unpublishedCount }}</h3>
+
+{% if booksPublished is empty and booksUnpublished is empty %}
+    <p>No Books found</p>
+{% else %}
+
+<h4>Livres publiés</h4>
+<ul>
+    {% for book in booksPublished %}
+        <li>
+            {{ book.title }} - {{ book.author ? book.author.username : 'Auteur inconnu' }}
+            <a href="{{ path('book_edit', {'id': book.id}) }}">Edit</a>
+            <a href="{{ path('book_delete', {'id': book.id}) }}" 
+               onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?');">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<h4>Livres non publiés</h4>
+<ul>
+    {% for book in booksUnpublished %}
+        <li>
+            {{ book.title }} - {{ book.author ? book.author.username : 'Auteur inconnu' }}
+            <a href="{{ path('book_edit', {'id': book.id}) }}">Edit</a>
+            <a href="{{ path('book_delete', {'id': book.id}) }}" 
+               onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?');">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+<a href="{{ path('addBook') }}" class="btn btn-primary mt-3">Ajouter un nouveau livre</a>
+<a href="{{ path('author_delete_empty') }}" class="btn btn-danger mt-3"
+   onclick="return confirm('Voulez-vous vraiment supprimer tous les auteurs sans livre ?');">Supprimer auteurs sans livre</a>
+{% endblock %}

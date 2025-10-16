@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur{% endblock %}
+
+{% block body %}
+
+ {{'HELLO' | lower}} <h1>Auteur :  {{ nom | upper }} {{ prenom }}</h1>
+
+
+  <img src="{{ asset('assets/images/1.jpg') }}" alt="">
+<img src="{{ asset('assets/images/3.jpg') }}" alt="">
+<img src="{{ asset('assets/images/photo1.jpg') }}" alt="Logo" width="200" height="150" >
+
+
+{% set hour=8%}
+{% if hour < 12 %}
+<p>Bonjour!</p>
+{% elseif hour < 18 %}
+<p>Bon aprés midi!</p>
+{% else%}
+<p>Bon aprés midi!</p>
+{% endif%}
+
+<a href="{{path('app_author')}}">lien 1</a>
+<a href="{{(url('app_author'))}}">lien 2</a>
+
+
+
+
+
+
+{% endblock %}
+
